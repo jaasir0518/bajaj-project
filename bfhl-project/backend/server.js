@@ -4,7 +4,8 @@ const bfhlRoutes = require('./src/routes/bfhlRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = (process.env.FRONTEND_ORIGIN || '')
+const defaultFrontendOrigin = 'https://bajaj-project-liard-rho.vercel.app';
+const allowedOrigins = (process.env.FRONTEND_ORIGIN || defaultFrontendOrigin)
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
