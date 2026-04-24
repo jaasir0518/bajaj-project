@@ -141,10 +141,16 @@ The frontend supports `VITE_API_URL`.
 Example:
 
 ```bash
-VITE_API_URL=http://localhost:3000/bfhl
+VITE_API_URL=https://your-render-backend.onrender.com/bfhl
 ```
 
 If `VITE_API_URL` is not set, the frontend falls back to `/bfhl`.
+
+For local development, you can still use:
+
+```bash
+VITE_API_URL=http://localhost:3000/bfhl
+```
 
 ## Validation Rules
 
@@ -185,6 +191,33 @@ npm run lint
 - Deploy the backend from `bfhl-project/backend`
 - Deploy the frontend from `frontend`
 - In production, set `VITE_API_URL` to the deployed backend `/bfhl` endpoint
+
+## Render Setup
+
+Use two separate Render services.
+
+### Backend Web Service
+
+- Root Directory: `bfhl-project/backend`
+- Build Command: `npm install`
+- Start Command: `npm start`
+- Environment Variable: `FRONTEND_ORIGIN=https://your-frontend.vercel.app`
+
+### Frontend Static Site
+
+- Root Directory: `frontend`
+- Build Command: `npm install && npm run build`
+- Publish Directory: `dist`
+
+Set `VITE_API_URL` in the frontend service to your deployed backend endpoint, for example:
+
+```bash
+https://your-backend.onrender.com/bfhl
+```
+
+If your frontend is deployed on Vercel instead of Render, set the same `VITE_API_URL` value in the Vercel project settings and rebuild the frontend.
+
+To restrict backend access in production, set `FRONTEND_ORIGIN` on Render to your deployed frontend URL. You can provide multiple origins as a comma-separated list if needed.
 
 ## Tech Stack
 

@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: bfhl-backend
+    runtime: node
+    rootDir: bfhl-project/backend
+    buildCommand: npm install
+    startCommand: npm start
+
+  - type: static_site
+    name: bfhl-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
